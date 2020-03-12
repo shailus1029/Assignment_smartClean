@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
-import homeReducer from "./homeReducer.js";
+import loginReducer from "./loginReducer.js";
 
 export default combineReducers({
-  homeReducer
+	loginReducer
 });

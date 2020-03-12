@@ -9,7 +9,7 @@ class TabularView extends Component {
 				type: "column"
 			},
 			title: {
-				text: "Column Chart"
+				text: null
 			},
 			xAxis: {
 				crosshair: true,
