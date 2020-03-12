@@ -20,7 +20,8 @@ class Home extends Component {
 		this.state = {
 			dom: [],
 			dow: [],
-			hour: []
+			hour: [],
+			sumHourly: []
 		};
 		this.handleLogOut = this.handleLogOut.bind(this);
 	}
@@ -35,15 +36,18 @@ class Home extends Component {
 			const dom = [];
 			const dow = [];
 			const hour = [];
+			const sumHourly = [];
 			highData.map(item => {
 				dom.push(item.dom);
 				dow.push(item.dow);
 				hour.push(item.hour);
+				sumHourly.push(item.SumHourly);
 			});
 			this.setState({
 				dom,
 				dow,
-				hour
+				hour,
+				sumHourly
 			});
 		} else {
 			this.props.history.push("/");
@@ -77,28 +81,40 @@ class Home extends Component {
 				<div className="contentView">
 					<Tabs defaultActiveKey="1" size="large">
 						<TabPane tab="Tabular View" key="1">
-							<TabularView
-								dom={this.state.dom}
-								dow={this.state.dow}
-								hour={this.state.hour}
-							/>
+							<div>
+								<TabularView
+									dom={this.state.dom}
+									dow={this.state.dow}
+									hour={this.state.hour}
+									sumHourly={this.state.sumHourly}
+								/>
+							</div>
 						</TabPane>
 						<TabPane tab="Chart View" key="2">
-							<BarChart
-								dom={this.state.dom}
-								dow={this.state.dow}
-								hour={this.state.hour}
-							/>
-							<LineChart
-								dom={this.state.dom}
-								dow={this.state.dow}
-								hour={this.state.hour}
-							/>
-							<AreaChart
-								dom={this.state.dom}
-								dow={this.state.dow}
-								hour={this.state.hour}
-							/>
+							<div className="chartContainer">
+								<BarChart
+									dom={this.state.dom}
+									dow={this.state.dow}
+									hour={this.state.hour}
+									sumHourly={this.state.sumHourly}
+								/>
+							</div>
+							<div className="chartContainer">
+								<LineChart
+									dom={this.state.dom}
+									dow={this.state.dow}
+									hour={this.state.hour}
+									sumHourly={this.state.sumHourly}
+								/>
+							</div>
+							<div className="chartContainer">
+								<AreaChart
+									dom={this.state.dom}
+									dow={this.state.dow}
+									hour={this.state.hour}
+									sumHourly={this.state.sumHourly}
+								/>
+							</div>
 						</TabPane>
 					</Tabs>
 				</div>

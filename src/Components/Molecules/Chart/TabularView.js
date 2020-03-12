@@ -51,6 +51,10 @@ class TabularView extends Component {
 				{
 					name: "hour",
 					data: this.props.hour
+				},
+				{
+					name: "SumHourly",
+					data: this.props.sumHourly
 				}
 			]
 		};

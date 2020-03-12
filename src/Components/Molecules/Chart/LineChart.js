@@ -39,6 +39,10 @@ class LineChart extends Component {
 				{
 					name: "Hour",
 					data: this.props.hour
+				},
+				{
+					name: "SumHourly",
+					data: this.props.sumHourly
 				}
 			]
 		};
