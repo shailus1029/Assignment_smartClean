@@ -1,37 +1,79 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { testAction } from "../../Redux/Actions/homeAction.js";
 import "./Home.css";
+import Highcharts from "highcharts";
+import HighchartsReact from "highcharts-react-official";
+import highData from "../../config/data.json";
+import AreaChart from "../../Components/Molecules/Chart/AreaChart";
+import BarChart from "../../Components/Molecules/Chart/BarChart";
+import LineChart from "../../Components/Molecules/Chart/LineChart";
+import TabularView from "../../Components/Molecules/Chart/TabularView";
 
 class Home extends Component {
-  simpleAction(event) {
-    this.props.simpleAction();
-  }
+	constructor(props) {
+		super(props);
+		this.state = {
+			dom: [],
+			dow: [],
+			hour: []
+		};
+	}
+	simpleAction(event) {
+		this.props.simpleAction();
+	}
 
-  render() {
-    return (
-      <div className="homeContainer">
-        <h1>React Project Set Up is ready</h1>
-        <button onClick={this.simpleAction.bind(this)}>
-          Test redux action
-        </button>
-        <pre>{JSON.stringify(this.props.homeReducer)}</pre>
-      </div>
-    );
-  }
+	componentDidMount() {
+		const dom = [];
+		const dow = [];
+		const hour = [];
+		highData.map(item => {
+			dom.push(item.dom);
+			dow.push(item.dow);
+			hour.push(item.hour);
+		});
+		this.setState({
+			dom,
+			dow,
+			hour
+		});
+	}
+
+	render() {
+		return (
+			<div className="homeContainer">
+				<TabularView
+					dom={this.state.dom}
+					dow={this.state.dow}
+					hour={this.state.hour}
+				/>
+				<BarChart
+					dom={this.state.dom}
+					dow={this.state.dow}
+					hour={this.state.hour}
+				/>
+				<LineChart
+					dom={this.state.dom}
+					dow={this.state.dow}
+					hour={this.state.hour}
+				/>
+				<AreaChart
+					dom={this.state.dom}
+					dow={this.state.dow}
+					hour={this.state.hour}
+				/>
+			</div>
+		);
+	}
 }
 
 const mapStateToProps = state => {
-  return {
-    homeReducer: state.homeReducer
-  };
+	return {
+		homeReducer: state.homeReducer
+	};
 };
 
 const mapDispatchToProps = dispatch => ({
-  simpleAction: () => dispatch(testAction())
+	simpleAction: () => dispatch(testAction())
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
